@@ -26,40 +26,6 @@ class Header extends Component {
   }
 }
 
-class SearchNote extends Component {
-  
-  constructor(props) {
-    super(props);
-    this.state = { note: '' }
-  }
-  
-  handleChange = (event) => {
-    this.setState( { note: event.target.value } );
-  }
-  
-  handleClick = (event) => {
-    event.preventDefault();    
-
-    // let the app manage the persistence & state 
-    this.props.searchNote( this.state ); 
-    
-  }
-  
-  render() {
-    return (
-      <div className="container">
-            <div className="input-group">
-              <input type="text" className="form-control form-control-lg" placeholder="Search for Notes" aria-label="Note" aria-describedby="basic-addon2" value={ this.state.note } onChange={this.handleChange}/>
-              <div className="input-group-append">
-                <button onClick={ this.handleClick } className="btn btn-primary" type="submit">Search</button>
-              </div>
-            </div>
-        </div>  
-    )
-  }
-}
-
-
 class AddNote extends Component {
   
   constructor(props) {
@@ -84,10 +50,10 @@ class AddNote extends Component {
   render() {
     return (
       <div className="container p-3">
-            <div className="input-group">
+            <div className="input-group mb-3 p-3">
               <input type="text" className="form-control form-control-lg" placeholder="New Note" aria-label="Note" aria-describedby="basic-addon2" value={ this.state.note } onChange={this.handleChange}/>
               <div className="input-group-append">
-                <button onClick={ this.handleClick } className="btn btn-primary" type="submit">&nbsp;&nbsp;Add&nbsp;&nbsp;</button>
+                <button onClick={ this.handleClick } className="btn btn-primary" type="submit">{ "Add Note" }</button>
               </div>
             </div>
         </div>  
@@ -123,25 +89,6 @@ class App extends Component {
     super(props);
     this.state = { notes:[] }
   }
-
-  searchNote = async (note) => {
-    var result;
-    
-    // when no search filter is passed, revert back to full list
-    if (note.note === "") {
-      result = await API.graphql(graphqlOperation(queries.listNotes));
-      this.setState( { notes: result.data.listNotes.items } )
-    } else {
-      // search 
-      result = await API.graphql(graphqlOperation(queries.searchNotes, {"search" : note.note}));
-      if (result.data.searchNotes.items.length > 0) {
-        this.setState( { notes : result.data.searchNotes.items } );   
-      } else {
-        // no search result, print help
-        this.setState( { notes : [ {id: "-1", note: "No Match: Clear the search to go back to your Notes"} ] } ); 
-      }
-    }
-  }  
   
   deleteNote = async (note) => {
     await API.graphql(graphqlOperation(queries.deleteNote, note));
@@ -165,7 +112,6 @@ class App extends Component {
         <div className="col m-3">
           <Header/>
           <AddNote addNote={ this.addNote }/>
-          <SearchNote searchNote={ this.searchNote }/>
           <NotesList notes={ this.state.notes } deleteNote={ this.deleteNote }/>
         </div> 
       </div> 
