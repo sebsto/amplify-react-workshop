@@ -1,4 +1,8 @@
+TODO - update this README
+
+Original article : 
 https://medium.com/open-graphql/create-a-multiuser-graphql-crud-l-app-in-10-minutes-with-the-new-aws-amplify-cli-and-in-a-few-73aef3d49545
+
 
 ```
 npx create-react-app amplifynotes
