@@ -389,9 +389,7 @@ Deleting env:dev
 ```
 
 You can follow the progress in the CloudFormation console.
-The above delete most of the resources, but not everything.  Please manually delete 
+The above command deletes most of the resources, but not everything.  Please manually delete.
 
-- the S3 bucket used for publishing 
-- the dynamodb table
-
-
+- the 2 S3 buckets used for deployment and for publishing (their names start with `amplifyreactworkshop-YYYYMMDD-`)
+- the Cloud9 environment (if any)
