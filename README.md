@@ -23,6 +23,9 @@ $ nvm install 10.15
 # verify the installation
 $ node --version 
 v10.15.1
+
+# make it the default for every sessions
+$ echo "nvm use 10.15" >> ~/.bash_profile
 ```
 
 - Install `amplify` command line and `create-react-app`
@@ -150,14 +153,41 @@ This should be the starting point of the live demo.
 
 ## Demo on stage
 
-For each demo step, switch to the demo instruction when told so in the slide deck.  
+Keep the app running an open a new Terminal Tab.  On Cloud9, click on `Window` => `New Terminal` and immediately `cd amplify-react-workshop/` for the rest of the demo.
+
+For each demo step, switch to the demo instructions when told so in the slide deck.  Go through the demo steps.  While cloud services are being created, go back to the slide and show the architecture being created.  The time to explain the architecture should be enough for the command to complete.  After you explained the architecture, come back to the terminal, change the source code and show the result.
+
+### Phase 1 : add user authentication
+
+Create backend services to support user authentication.
 
 ```bash
-amplify add auth
-amplify push 
+$ amplify add auth
+
+Using service: Cognito, provided by: awscloudformation
+ The current configured provider is Amazon Cognito. 
+ Do you want to use the default authentication and security configuration? Yes, use the default confi
+guration.
+Successfully added resource cognito425d1f4b locally
+
+$ amplify push 
+
+Current Environment: dev
+
+| Category | Resource name   | Operation | Provider plugin   |
+| -------- | --------------- | --------- | ----------------- |
+| Auth     | cognito425d1f4b | Create    | awscloudformation |
+? Are you sure you want to continue? Yes
+⠙ Updating resources in the cloud. This may take a few minutes...
+
+... (it takes 2-3 minutes to complete) ...
+
+✔ All resources are updated in the cloud
 ```
 
-```
+While the services are being provisioned, show the architecture slide and come back to modify the source.
+
+```javascript
 import Amplify from 'aws-amplify';
 import { withAuthenticator } from 'aws-amplify-react';
 import aws_exports from './aws-exports.js';
@@ -166,9 +196,23 @@ Amplify.configure(aws_exports);
 export default withAuthenticator(App, { includeGreetings : true});
 ```
 
-see ``src/App.1.js``
+Alternatively, use the terminal to modify the app based on `src/App1.js`:
 
----
+ ```bash
+ $ cp src/App.1.js src/App.js
+ ```
+
+ This should trigger the compilation and a refresh in the browser.  You can observe the progress of compilation in the terminal tab where you launched the server.  If the browser does not refresh automatically, just force a refresh when compilation has finished.
+
+![phase1](images/phase1.png)
+
+Demo the signin process :
+- create an account (using valid email address and password with upper case, number and sign, such as `Passw0rd;`) 
+- check your email 
+- confirm the account creation from the email 
+- login in the app 
+
+### Phase 2 : add a GraphQL API
 
 ```
 amplify add api 
