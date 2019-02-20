@@ -289,23 +289,83 @@ Note : if you built the app from scratch, instead of cloning my git repo, you wi
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 ```
 
---- 
+### Phase 3 : Add search capabilities
 
-amplify/backend/api/amplifynotes/schema.graphql 
+In this last phase, we are going to add search capabilities.  
 
-```
+Let's edit the GraphQL schema at `amplify/backend/api/amplifynotes/schema.graphql` and add `@searchable` on the first line.  Full schema must look like this :
+
+```graphql
 type Note @model @auth(rules: [{allow: owner}]) @searchable {
   id: ID!
   note: String!
 }
 ```
+And push the change to the backend.  
 
 ```
-amplify push 
+$ amplify push 
+
+Current Environment: dev
+
+| Category | Resource name        | Operation | Provider plugin   |
+| -------- | -------------------- | --------- | ----------------- |
+| Api      | amplifyreactworkshop | Update    | awscloudformation |
+| Auth     | cognito425d1f4b      | No Change | awscloudformation |
+? Are you sure you want to continue? Yes
+
+GraphQL schema compiled successfully.
+Edit your schema at /home/ec2-user/environment/amplify-react-workshop/amplify/backend/api/amplifyreactworkshop/schema.graphql or place .graphql files in a directory at /home/ec2-user/environment/amplify-react-workshop/amplify/backend/api/amplifyreactworkshop/schema
+? Do you want to update code for your updated GraphQL API Yes
+? Do you want to generate GraphQL statements (queries, mutations and subscription) based on your sche
+ma types? This will overwrite your current graphql queries, mutations and subscriptions Yes
+⠹ Updating resources in the cloud. This may take a few minutes...
+
+... (it takes 10 minutes) ...
 ```
 
-see src/App.3.js
+While the server side infrastructure is created, explain the architecture being created using the next slide in the slide deck.  
 
+When back to the demo, use the terminal to modify the app based on `src/App.3.js`:
 
+ ```bash
+ $ cp src/App.3.js src/App.js
+ ```
 
+ This should trigger the compilation and a refresh in the browser.  You can observe the progress of compilation in the terminal tab where you launched the server.  If the browser does not refresh automatically, just force a refresh when compilation has finished.
+
+ Show the search is working.  Please pay attention to the following :
+
+ - only new notes are indexed and searchable.  The ones created before have not been ingested automatically to the index.
+
+ - search is on full words only, do not search for substrings.
+
+### Phase 4 : Publish your app 
+
+Publish your app to make it accessible to the world.
+
+```bash
+$ amplify add hosting 
+? Select the environment setup: DEV (S3 only with HTTP)
+? hosting bucket name amplifyreactworkshop-20190220174529-hostingbucket
+? index doc for the website index.html
+? error doc for the website index.html
+
+You can now publish your app using the following command:
+Command: amplify publish
+
+$ amplify publish
+```
+
+Be sure to choose `dev` publishing.  `prod` is causing `amplify` to create a CloudFront distribution, which takes 10-15 minutes.  
+
+`amplify publish` will make a full project compile, packaging, create the bucket and deploy your app.  While it does that, go back to the slide to explain the infrastructure being created.
+
+Demo the app by connecting to the public web site just having been created.
+
+ ## Cleanup 
+
+  Congrats ! Demo is finished.  You now have a basic CRUD application, with user authentication and full search capabilities.
+  
+  To cleanup resources, follow these steps :
 
