@@ -114,7 +114,7 @@ Initialized your environment successfully.
 Your project has been successfully initialized and connected to the cloud!
 ```
 
-3. Customize the look and feel (optional)
+3. Customize the look and feel (only required if you do not git clone this repo)
 
 Open `App.css` and locate `App-header` (line 10).  
 Remove : `min-height` line  
