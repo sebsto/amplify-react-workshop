@@ -1,8 +1,16 @@
-TODO - update this README
+# Amplify & React Native Demo
 
-Original article : 
-https://medium.com/open-graphql/create-a-multiuser-graphql-crud-l-app-in-10-minutes-with-the-new-aws-amplify-cli-and-in-a-few-73aef3d49545
+This code and readme was built to illustrate the demo of the AWS Dev Day 2019 talk: "Integrate your front end apps with serverless backend in the cloud"
+This talk has been proposed to a couple of third-party conferences as well.
 
+The original app idea and steps are taken from [this blog post](https://medium.com/open-graphql/create-a-multiuser-graphql-crud-l-app-in-10-minutes-with-the-new-aws-amplify-cli-and-in-a-few-73aef3d49545
+) from Ed Lima.
+
+## Pre-requisites
+
+- Have a dev machine, either your laptop or [Cloud 9](https://aws.amazon.com/cloud9/getting-started/)
+
+- 
 
 ```
 npx create-react-app amplifynotes
