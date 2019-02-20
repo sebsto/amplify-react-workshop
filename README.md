@@ -355,6 +355,16 @@ You can now publish your app using the following command:
 Command: amplify publish
 
 $ amplify publish
+
+Current Environment: dev
+
+| Category | Resource name        | Operation | Provider plugin   |
+| -------- | -------------------- | --------- | ----------------- |
+| Hosting  | S3AndCloudFront      | Create    | awscloudformation |
+| Auth     | cognito425d1f4b      | No Change | awscloudformation |
+| Api      | amplifyreactworkshop | No Change | awscloudformation |
+? Are you sure you want to continue? Yes
+⠙ Updating resources in the cloud. This may take a few minutes...
 ```
 
 Be sure to choose `dev` publishing.  `prod` is causing `amplify` to create a CloudFront distribution, which takes 10-15 minutes.  
@@ -368,4 +378,20 @@ Demo the app by connecting to the public web site just having been created.
   Congrats ! Demo is finished.  You now have a basic CRUD application, with user authentication and full search capabilities.
   
   To cleanup resources, follow these steps :
+
+```
+$ amplify delete
+? Are you sure you want to continue?(This would delete all the environments of the project from the c
+loud and wipe out all the local amplify resource files) Yes
+
+Deleting env:dev
+⠴ Deleting resources from the cloud. This may take a few minutes...
+```
+
+You can follow the progress in the CloudFormation console.
+The above delete most of the resources, but not everything.  Please manually delete 
+
+- the S3 bucket used for publishing 
+- the dynamodb table
+
 
