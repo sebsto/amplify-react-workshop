@@ -214,27 +214,80 @@ Demo the signin process :
 
 ### Phase 2 : add a GraphQL API
 
-```
-amplify add api 
-amplify push
+Phase 2 is about adding a GraphQL API with a simple schema and data model.
+
+```bash
+$ amplify add api 
+? Please select from one of the below mentioned services GraphQL
+? Provide API name: amplifyreactworkshop
+? Choose an authorization type for the API Amazon Cognito User Pool
+Use a Cognito user pool configured as a part of this project
+? Do you have an annotated GraphQL schema? No
+? Do you want a guided schema creation? Yes
+? What best describes your project: Objects with fine-grained access control (e.g., a project managem
+ent app with owner-based authorization)
+? Do you want to edit the schema now? Yes
+Please manually edit the file created at /home/ec2-user/environment/amplify-react-workshop/amplify/backend/api/amplifyreactworkshop/schema.graphql
 ```
 
-```
+Open the file listed above and add this schema :
+
+```graphql
 type Note @model @auth(rules: [{allow: owner}]){
   id: ID!
   note: String!
 }
 ```
 
----
+Save the file, come back to the `amplify` CLI and press `enter` to continue.  You should see the message 
 
-
-public/index.html : 
 ```
+GraphQL schema compiled successfully.
+```
+
+Finally, push the changes to the server
+
+```bash
+$ amplify push
+
+Current Environment: dev
+
+| Category | Resource name        | Operation | Provider plugin   |
+| -------- | -------------------- | --------- | ----------------- |
+| Api      | amplifyreactworkshop | Create    | awscloudformation |
+| Auth     | cognito425d1f4b      | No Change | awscloudformation |
+? Are you sure you want to continue? Yes
+
+GraphQL schema compiled successfully.
+Edit your schema at /home/ec2-user/environment/amplify-react-workshop/amplify/backend/api/amplifyreactworkshop/schema.graphql or place .graphql files in a directory at /home/ec2-user/environment/amplify-react-workshop/amplify/backend/api/amplifyreactworkshop/schema
+? Do you want to generate code for your newly created GraphQL API Yes
+? Choose the code generation language target javascript
+? Enter the file name pattern of graphql queries, mutations and subscriptions src/graphql/**/*.js
+? Do you want to generate/update all possible GraphQL operations - queries, mutations and subscriptio
+ns Yes
+? Enter maximum statement depth [increase from default if your schema is deeply nested] 2
+⠹ Updating resources in the cloud. This may take a few minutes...
+
+... (it takes 2-3 minutes) ...
+```
+
+Use the terminal to modify the app based on `src/App2.js`:
+
+ ```bash
+ $ cp src/App.2.js src/App.js
+ ```
+
+ This should trigger the compilation and a refresh in the browser.  You can observe the progress of compilation in the terminal tab where you launched the server.  If the browser does not refresh automatically, just force a refresh when compilation has finished.
+
+![phase2](images/phase2.png)
+
+Demo the app by adding and deleting a few notes.  You can show that the Notes are added to DynamoDB.
+
+Note : if you built the app from scratch, instead of cloning my git repo, you will need to add FontAwesome in `public/index.html:5`.  This will allow to use the trash can icon to delete Notes.
+
+```html
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 ```
-
-see src/App.2.js
 
 --- 
 
