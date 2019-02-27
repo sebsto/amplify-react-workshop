@@ -15,7 +15,6 @@ class Header extends Component {
   }
 }
 
-
 class App extends Component {
 
   constructor(props) {
