@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "aws-amplify": "^1.1.19",
-    "aws-amplify-react": "^2.3.0",
+    "aws-amplify": "^1.1.26",
+    "aws-amplify-react": "^2.3.6",
     "bootstrap": "^4.2.1",
+    "jquery": "^3.4.0",
+    "popper": "^1.0.1",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-router-dom": "^4.3.1",
