@@ -6,6 +6,9 @@ This talk has been proposed to a couple of third-party conferences as well.
 The original app idea and steps are taken from [this blog post](https://medium.com/open-graphql/create-a-multiuser-graphql-crud-l-app-in-10-minutes-with-the-new-aws-amplify-cli-and-in-a-few-73aef3d49545
 ) from my Australian Solution Architect colleague [Ed Lima](https://twitter.com/ednergizer).
 
+You can test [an hosted version](http://amplifyreactworkshop-20190506180533-hostingbucket-dev.s3-website-eu-west-1.amazonaws.com
+) as well.
+
 ## Before the demo
 
 I strongly suggest to go through the prerequisites and the phase 0, the initial scaffolding for the app, **before** you start the demo, as these steps take 10-15 minutes to complete.
